@@ -127,7 +127,8 @@ def output_results(Ifile_name, smiles, adducts, ccs_pred, Ofile_name):
     results_table = pd.DataFrame({"SMILES": smiles, "Adducts": adducts, "CCS_DeepCCS": ccs_pred})
     results_table.transpose()
 
-    out_df = pd.merge(left=table, right=results_table, on=["SMILES", "Adducts"], how='left')
+    #out_df = pd.merge(left=table, right=results_table, on=["SMILES", "Adducts"], how='left')
+    out_df = pd.merge(left=results_table, right=table, on=["SMILES", "Adducts"], how='left')
 
     pd.options.display.max_colwidth = 2000
     out_df_string = out_df.to_string(header=True)

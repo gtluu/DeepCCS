@@ -114,7 +114,10 @@ class SmilesToOneHotEncoder(BaseEncoder):
         X_encoded = np.zeros((number_of_element, self._max_length, len(self.converter)))
         for i, smiles in enumerate(X_padded):
             for j, letter in enumerate(smiles):
-                X_encoded[i, j, self.converter[letter]] = 1
+                try:
+                    X_encoded[i, j, self.converter[letter]] = 1
+                except KeyError:
+                    pass
         return X_encoded
 
     def _pad_smiles(self, smiles, padding_char=" "):
